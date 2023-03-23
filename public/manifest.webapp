@@ -1,0 +1,20 @@
+{
+  "version": "0.0.1",
+  "name": "Hello, 世界!",
+  "description": "A Hello World example in Svelte",
+  "type": "web",
+  "launch_path": "/index.html",
+  "icons": {},
+  "developer": {
+    "name": "diamondburned",
+    "url": "https://libdb.so"
+  },
+  "locales": {
+    "en-US": {
+      "name": "Hello, World!",
+      "subtitle": "A Hello World example in Svelte",
+      "description": "A Hello World example in Svelte"
+    }
+  },
+  "default_locale": "en-US"
+}
