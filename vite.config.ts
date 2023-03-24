@@ -1,11 +1,29 @@
 import { defineConfig, loadEnv } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { VitePWA as vitePWA } from "vite-plugin-pwa";
 import type * as vite from "vite";
+import * as crypto from "crypto";
 import * as path from "path";
+import * as fs from "fs/promises";
 import sveltePreprocess from "svelte-preprocess";
+import manifest from "./src/manifest.json";
 
 export default defineConfig({
   plugins: [
+    vitePWA({
+      manifest,
+      registerType: "autoUpdate",
+      // See:
+      // https://vite-pwa-org.netlify.app/workbox/generate-sw.html
+      // https://vite-pwa-org.netlify.app/workbox/inject-manifest.html
+      strategies: "generateSW",
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,ico,png}"],
+      },
+      devOptions: {
+        enabled: true,
+      },
+    }),
     svelte({
       preprocess: sveltePreprocess(),
     }),
@@ -27,3 +45,10 @@ export default defineConfig({
     },
   },
 });
+
+async function hash(filename: string): Promise<string> {
+  const file = await fs.readFile(filename);
+  const hash = crypto.createHash("sha256");
+  hash.update(file);
+  return hash.digest("base64");
+}
