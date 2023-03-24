@@ -17,5 +17,17 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "developer": {
+    "name": "diamondburned",
+    "url": "https://libdb.so"
+  },
+  "locales": {
+    "en-US": {
+      "name": "Hello, World!",
+      "subtitle": "A Hello World example in Svelte",
+      "description": "A Hello World example in Svelte"
+    }
+  },
+  "default_locale": "en-US"
 }
