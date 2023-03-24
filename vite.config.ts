@@ -10,6 +10,20 @@ import manifest from "./src/manifest.json";
 
 export default defineConfig({
   plugins: [
+    {
+      name: "manifest-index",
+      transformIndexHtml: {
+        enforce: "pre",
+        transform(html: string) {
+          return html.replace(
+            /{{\s*(.+)\s*}}/gi,
+            // https://esbuild.github.io/content-types/#direct-eval
+            (match, expr) =>
+              new Function("manifest", `return ${expr}`)(manifest) || ""
+          );
+        },
+      },
+    },
     vitePWA({
       manifest,
       registerType: "autoUpdate",
