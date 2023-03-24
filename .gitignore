@@ -1,4 +1,4 @@
-node_modules
-src/dev-dist
-dist
-.envrc
+/node_modules
+/src/dev-dist
+/dist
+/.envrc
